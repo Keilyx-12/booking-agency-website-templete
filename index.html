@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Lab - Premium Paint Protection & Detailing</title>
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        body {
+            background-color: #050507;
+            color: white;
+            overflow-x: hidden;
+            padding-bottom: 60px; /* space for fixed footer */
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: rgba(5, 5, 7, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .nav-bar__logo {
+            font-size: 24px;
+            letter-spacing: -0.04em;
+            font-weight: bold;
+        }
+        .nav-bar__links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .nav-bar__link {
+            font-size: 14px;
+            color: #a1a1aa;
+            transition: color 0.3s ease;
+        }
+        .nav-bar__link:hover {
+            color: white;
+        }
+        .nav-bar__action-button {
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        .nav-bar__action-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 90vh;
+            padding: 120px 20px 80px 20px;
+            background: radial-gradient(circle at center, rgba(225, 29, 72, 0.05) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Video Styling */
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .hero-section__badge {
+            margin-bottom: 24px;
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section__badge__text {
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #a1a1aa;
+        }
+        .hero-section__headline {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            max-width: 800px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to bottom, #ffffff 60%, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section__buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section__button {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        .hero-section__button--primary {
+            background-color: white;
+            color: black;
+            border: none;
+        }
+        .hero-section__button--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+        .hero-section__button--secondary {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-section__button--secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Bento Grid Portfolio */
+        .portfolio-section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 32px;
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .bento-card {
+            background-color: #0c0c0e;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 240px;
+        }
+        .bento-card--large {
+            grid-column: span 2;
+        }
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .bento-card__content {
+            padding: 32px;
+            background: linear-gradient(to top, rgba(5,5,7,0.9) 0%, transparent 100%);
+        }
+        .bento-card__title {
+            font-size: 22px;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .bento-card__description {
+            font-size: 14px;
+            color: #71717a;
+            line-height: 1.5;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: radial-gradient(circle at bottom, rgba(225, 29, 72, 0.03) 0%, transparent 60%);
+        }
+        .pricing-card {
+            background-color: #0c0c0e;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .pricing-card__title {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #71717a;
+            margin-bottom: 16px;
+        }
+        .pricing-card__price {
+            font-size: 64px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 12px;
+        }
+        .pricing-card__description {
+            font-size: 14px;
+            color: #a1a1aa;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .pricing-card__button {
+            width: 100%;
+            padding: 14px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: block;
+            text-align: center;
+        }
+        .pricing-card__button:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            background-color: #050507;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0 40px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .footer__links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer__link {
+            font-size: 12px;
+            color: #71717a;
+        }
+        .footer__link:hover {
+            color: white;
+        }
+        .footer__copy {
+            font-size: 12px;
+            color: #4b5563;
+        }
+
+        /* Responsive design rules */
+        @media (max-width: 768px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-card--large { grid-column: span 1; }
+            .hero-section__headline { font-size: 38px; }
+            .nav-bar__links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <div class="nav-bar__logo">Apex Lab.</div>
+        <div class="nav-bar__links">
+            <a href="#" class="nav-bar__link">About Us</a>
+            <a href="#treatments" class="nav-bar__link">Services</a>
+            <a href="#" class="nav-bar__link">Contact Us</a>
+        </div>
+        <a href="booking.html" class="nav-bar__action-button">Get Started</a>
+    </div>
+
+    <section class="hero-section">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="0628.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-section__badge">
+            <span class="hero-section__badge__text">Premium Paint Protection & Detailing</span>
+        </div>
+        <h1 class="hero-section__headline">We engineer absolute automotive perfection.</h1>
+        <div class="hero-section__buttons">
+            <a href="#treatments" class="hero-section__button hero-section__button--primary">View Services</a>
+            <a href="booking.html" class="hero-section__button hero-section__button--secondary">Reserve Slot</a>
+        </div>
+    </section>
+
+    <section class="portfolio-section" id="treatments">
+        <h2 class="section-title">Specialized Treatments</h2>
+        <div class="bento-grid">
+            <div class="bento-card bento-card--large">
+                <div class="bento-card__content">
+                    <h3 class="bento-card__title">Ceramic Coating</h3>
+                    <p class="bento-card__description">Ultra-hydrophobic quartz protection layers engineered for high-gloss permanence.</p>
+                </div>
+            </div>
+            <div class="bento-card">
+                <div class="bento-card__content">
+                    <h3 class="bento-card__title">Paint Correction</h3>
+                    <p class="bento-card__description">Multi-stage machine polishing removing 99% of micro-scratches and defects.</p>
+                </div>
+            </div>
+            <div class="bento-card">
+                <div class="bento-card__content">
+                    <h3 class="bento-card__title">Interior Detail</h3>
+                    <p class="bento-card__description">Deep conditioning, steam sterilization, and bespoke matte leather nourishment.</p>
+                </div>
+            </div>
+            <div class="bento-card bento-card--large">
+                <div class="bento-card__content">
+                    <h3 class="bento-card__title">PPF Studio</h3>
+                    <p class="bento-card__description">Self-healing paint protection film shielding your asset from stone chips and debris.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction & Philosophy Section -->
+    <section class="intro-section" style="padding: 100px 40px; max-width: 800px; margin: 0 auto; text-align: center;">
+        <h2 style="font-size: 32px; letter-spacing: -0.03em; margin-bottom: 24px;">The Reality of Paint Correction</h2>
+        <p style="color: #a1a1aa; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+            A cheap RM50 car wash uses dirty cloths that leave microscopic swirls and scratches all over your clear coat, killing your car's true gloss. We built Apex Lab to reverse that damage. We don't hide defects under cheap wax that washes off in two weeks.
+        </p>
+        <p style="color: #71717a; font-size: 14px; line-height: 1.6;">
+            Every car goes through a full multi-stage chemical decontamination and deep machine polishing under intense inspection lights before we lock everything down with high-solid ceramic coatings. It takes days of detailed, exhausting work in our closed studio, but it's the only way to get a permanent, flawless glass finish. 
+        </p>
+    </section>
+
+    <!-- Social Proof / Reviews Section -->
+    <section class="reviews-section" style="padding: 60px 40px 100px 40px; max-width: 1200px; margin: 0 auto;">
+        <h2 style="font-size: 32px; letter-spacing: -0.03em; margin-bottom: 40px; text-align: center;">Trusted by Collectors</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            
+            <!-- Review 1 -->
+            <div style="background-color: #0c0c0e; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px;">
+                <div style="color: #f59e0b; margin-bottom: 16px; font-size: 18px;">★★★★★</div>
+                <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    "Sent my new car here straight from the showroom for a Stage 2 correction and coating. The gloss is unbelievable—water just slides off completely. Worth every ringgit."
+                </p>
+                <h4 style="font-size: 14px; font-weight: 600;">— Farhan Z.</h4>
+            </div>
+
+            <!-- Review 2 -->
+            <div style="background-color: #0c0c0e; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px;">
+                <div style="color: #f59e0b; margin-bottom: 16px; font-size: 18px;">★★★★★</div>
+                <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    "Absolute perfectionists. They treated my vintage asset with total respect and kept me updated with videos throughout the entire process. Highly recommend."
+                </p>
+                <h4 style="font-size: 14px; font-weight: 600;">— Michael T.</h4>
+            </div>
+
+            <!-- Review 3 -->
+            <div style="background-color: #0c0c0e; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px;">
+                <div style="color: #f59e0b; margin-bottom: 16px; font-size: 18px;">★★★★★</div>
+                <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    "The automated scheduling system is fantastic. Picked a slot, got confirmation instantly, dropped the car off, and picked it up right on time. Zero friction."
+                </p>
+                <h4 style="font-size: 14px; font-weight: 600;">— Shahril A.</h4>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="pricing-card">
+            <h2 class="pricing-card__title">Signature Correction & Coating</h2>
+            <h1 class="pricing-card__price">RM1,199</h1>
+            <p class="pricing-card__description">Complete exterior decontamination, stage-2 paint correction, and a 3-year hydrophobic quartz coating. Secured via automated booking.</p>
+            <a href="booking.html" class="pricing-card__button">Lock In Appointment</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer__links">
+            <a href="#" class="footer__link">Terms & Conditions</a>
+            <a href="#" class="footer__link">Privacy Policy</a>
+        </div>
+        <div class="footer__copy">© 2026 Apex Lab. All rights reserved.</div>
+    </footer>
+
+</body>
+</html>
