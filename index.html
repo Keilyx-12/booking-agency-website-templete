@@ -182,7 +182,7 @@
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 260px; /* This locks both rows to exact matching heights */
+            grid-auto-rows: 280px;
             gap: 24px;
         }
         .bento-card {
@@ -198,6 +198,7 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
+            height: 100%;
         }
         .bento-card--large {
             grid-column: span 2;
@@ -210,7 +211,7 @@
         .bento-card__content {
             padding: 32px;
             width: 100%;
-            background: linear-gradient(to top, rgba(5,5,7,0.95) 40%, rgba(5,5,7,0.2) 80%, transparent 100%);
+            background: linear-gradient(to top, rgba(5,5,7,1) 30%, rgba(5,5,7,0.5) 70%, transparent 100%);
             z-index: 2;
         }
         .bento-card__title {
