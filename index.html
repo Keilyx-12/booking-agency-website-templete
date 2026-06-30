@@ -276,7 +276,7 @@
             transform: scale(1.02);
         }
 
-        /* Premium Form Styling for Option 1 */
+        /* Premium Form Styling */
         .booking-container {
             max-width: 600px;
             margin: 40px auto 100px auto;
@@ -398,25 +398,25 @@
     <section class="portfolio-section" id="treatments">
         <h2 class="section-title">Specialized Treatments</h2>
         <div class="bento-grid">
-            <div class="bento-card bento-card--large" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80');">
+            <div class="bento-card bento-card--large" style="background-image: url('ceramic coating.webp');">
                 <div class="bento-card__content">
                     <h3 class="bento-card__title">Ceramic Coating</h3>
                     <p class="bento-card__description">Ultra-hydrophobic quartz protection layers engineered for high-gloss permanence.</p>
                 </div>
             </div>
-            <div class="bento-card" style="background-image: url('https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=500&q=80');">
+            <div class="bento-card" style="background-image: url('paint correction.webp');">
                 <div class="bento-card__content">
                     <h3 class="bento-card__title">Paint Correction</h3>
                     <p class="bento-card__description">Multi-stage machine polishing removing 99% of micro-scratches and defects.</p>
                 </div>
             </div>
-            <div class="bento-card" style="background-image: url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=500&q=80');">
+            <div class="bento-card" style="background-image: url('detailing.webp');">
                 <div class="bento-card__content">
                     <h3 class="bento-card__title">Interior Detail</h3>
                     <p class="bento-card__description">Deep conditioning, steam sterilization, and bespoke matte leather nourishment.</p>
                 </div>
             </div>
-            <div class="bento-card bento-card--large" style="background-image: url('https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80');">
+            <div class="bento-card bento-card--large" style="background-image: url('ppf studio.webp');">
                 <div class="bento-card__content">
                     <h3 class="bento-card__title">PPF Studio</h3>
                     <p class="bento-card__description">Self-healing paint protection film shielding your asset from stone chips and debris.</p>
@@ -425,7 +425,6 @@
         </div>
     </section>
 
-    <!-- Introduction & Philosophy Section -->
     <section class="intro-section" style="padding: 100px 40px; max-width: 800px; margin: 0 auto; text-align: center;">
         <h2 style="font-size: 32px; letter-spacing: -0.03em; margin-bottom: 24px;">The Reality of Paint Correction</h2>
         <p style="color: #a1a1aa; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
@@ -436,13 +435,11 @@
         </p>
     </section>
 
-    <!-- Social Proof / Reviews Section -->
     <section class="reviews-section" style="padding: 60px 40px 100px 40px; max-width: 1200px; margin: 0 auto;">
         <h2 style="font-size: 32px; letter-spacing: -0.03em; margin-bottom: 40px; text-align: center;">Trusted by Collectors</h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
             
-            <!-- Review 1 -->
             <div style="background-color: #0c0c0e; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px;">
                 <div style="color: #f59e0b; margin-bottom: 16px; font-size: 18px;">★★★★★</div>
                 <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
@@ -451,7 +448,6 @@
                 <h4 style="font-size: 14px; font-weight: 600;">— Farhan Z.</h4>
             </div>
 
-            <!-- Review 2 -->
             <div style="background-color: #0c0c0e; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px;">
                 <div style="color: #f59e0b; margin-bottom: 16px; font-size: 18px;">★★★★★</div>
                 <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
@@ -460,7 +456,6 @@
                 <h4 style="font-size: 14px; font-weight: 600;">— Michael T.</h4>
             </div>
 
-            <!-- Review 3 -->
             <div style="background-color: #0c0c0e; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px;">
                 <div style="color: #f59e0b; margin-bottom: 16px; font-size: 18px;">★★★★★</div>
                 <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
@@ -481,7 +476,6 @@
         </div>
     </section>
 
-    <!-- Option 1: Premium Direct WhatsApp Booking Form -->
     <div class="booking-container" id="portal">
         <h2 style="font-size: 24px; letter-spacing: -0.03em; margin-bottom: 8px; text-align: center;">Booking Request</h2>
         <p style="color: #71717a; font-size: 14px; text-align: center; margin-bottom: 32px;">Fill out your details below to instantly route your slot request to our team via WhatsApp.</p>
@@ -525,7 +519,6 @@
         <div class="footer__copy">© 2026 Apex Lab. All rights reserved.</div>
     </footer>
 
-    <!-- Form Processing Logic -->
     <script type="text/javascript">
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -537,7 +530,6 @@
             const date = document.getElementById('bookingDate').value;
 
             // 2. Put your target business phone number here (Use country code, no "+" sign)
-            // Example: '60123456789' for a Malaysian number
             const phoneNumber = '60123456789'; 
 
             // 3. Build the fully formatted text block
