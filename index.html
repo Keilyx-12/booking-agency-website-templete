@@ -19,6 +19,8 @@
       padding: 24px 16px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
     .container {
@@ -37,7 +39,7 @@
     /* Bento Grid System */
     .bento-grid {
       display: grid;
-      grid-template-columns: repeat(1, 1fr); /* 1 column on mobile phones */
+      grid-template-columns: repeat(1, 1fr); /* Mobile layout default */
       gap: 16px;
     }
 
@@ -53,7 +55,13 @@
       justify-content: flex-end;
       padding: 24px;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile tap */
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Subtle active feedback layer for mobile touch */
+    .bento-card:active {
+      transform: scale(0.98);
     }
 
     /* Full Bleed WebP Background Images */
@@ -67,14 +75,14 @@
       z-index: 1;
     }
 
-    /* Dark gradient overlay ensures the white text is readable regardless of image brightness */
+    /* Dark gradient overlay layers text visibility safely over random graphics */
     .card-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 30%, rgba(0, 0, 0, 0.2) 100%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 35%, rgba(0, 0, 0, 0.2) 100%);
       z-index: 2;
     }
 
@@ -88,6 +96,7 @@
       font-size: 1.4rem;
       font-weight: 600;
       margin-bottom: 6px;
+      letter-spacing: -0.3px;
     }
 
     .card-content p {
@@ -96,13 +105,18 @@
       line-height: 1.4;
     }
 
-    /* Desktop & Tablet Optimization (Bento Layout Triggers Here) */
+    /* Desktop & Tablet Optimization (Bento Layout Breakpoint) */
     @media (min-width: 768px) {
       .bento-grid {
-        grid-template-columns: repeat(3, 1fr); /* Upgrades to 3 columns on desktop */
+        grid-template-columns: repeat(3, 1fr); /* 3 column macro layout */
       }
 
-      /* Variations matching the structure in Screenshot 2026-06-30 at 20.23.06.png */
+      .bento-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+      }
+
+      /* Specific positioning structures matching bento parameters */
       .long {
         grid-column: span 2;
       }
@@ -170,16 +184,15 @@
 
   <script>
     function sendWhatsApp(serviceName) {
-      // NOTE: Replace this number with your client's actual phone number (include country code, e.g., 60123456789)
+      // Input your operational target phone system string here (including regional codes, no special characters)
       const phoneNumber = "60123456789"; 
       
-      // Auto-formats a professional pre-filled text string using bold markers (*) for WhatsApp formatting
+      // Structural injection logic creating standard data block requests natively
       const message = `Hi! I'm looking to secure a slot for the *${serviceName}* treatment. Please let me know your next available openings.`;
       
-      // Encodes spaces and special characters cleanly for the URL
+      // Complete payload routing parameters parsing safety execution strings
       const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
       
-      // Opens WhatsApp in a clean new tab
       window.open(url, '_blank');
     }
   </script>
