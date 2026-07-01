@@ -335,11 +335,10 @@
             background-color: #e4e4e7;
         }
 
-        /* Footer */
-     footer {
+   footer {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Pushes the blank link container left, everything else right */
+    justify-content: space-between; /* Pushes empty links left, and right-side content right */
     height: 60px;
     background-color: #050507;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -355,17 +354,21 @@
     gap: 24px;
 }
 
-/* This targets the copyright text and forces it to sit beside the icons */
+/* This is the fix: wraps the text and icons into a neat row alignment */
+.footer__right-side {
+    display: flex;
+    align-items: center;
+    gap: 24px; /* Space between the text and the icons */
+}
+
 .footer__copy {
     font-size: 12px;
     color: #4b5563;
-    margin-left: auto; /* Magic trick: shoves the text all the way to the right side */
-    margin-right: 24px; /* Creates a clean gap before the social emblems start */
 }
 
 .footer__socials {
     display: flex;
-    gap: 16px;
+    gap: 16px; /* Space between individual social icons */
 }
 
 .footer__social-icon {
@@ -378,6 +381,7 @@
     color: white;
     transform: translateY(-2px);
 }
+
 
 /* Fixes display spacing for compact smartphone viewports */
 @media (max-width: 768px) {
@@ -547,22 +551,24 @@
 
 <footer>
     <div class="footer__links">
-        <!-- Keep this completely blank if you don't have secondary site pages -->
+        <!-- Kept completely empty just like you wanted -->
     </div>
     
-    <div class="footer__copy">© 2026 Apex Lab. All rights reserved.</div>
-
-    <!-- The social icons sit directly in the footer container row -->
-    <div class="footer__socials">
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="TikTok">
-            <i class="fab fa-tiktok"></i>
-        </a>
+    <!-- This new wrapper groups everything on the right side together -->
+    <div class="footer__right-side">
+        <div class="footer__copy">© 2026 Apex Lab. All rights reserved.</div>
+        
+        <div class="footer__socials">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
     </div>
 </footer>
 
