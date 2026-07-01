@@ -336,34 +336,55 @@
         }
 
         /* Footer */
-        footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 60px;
-            background-color: #050507;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 0 40px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        .footer__links {
-            display: flex;
-            gap: 24px;
-        }
-        .footer__link {
-            font-size: 12px;
-            color: #71717a;
-        }
-        .footer__link:hover {
-            color: white;
-        }
-        .footer__copy {
-            font-size: 12px;
-            color: #4b5563;
-        }
+     footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes the blank link container left, everything else right */
+    height: 60px;
+    background-color: #050507;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.footer__links {
+    display: flex;
+    gap: 24px;
+}
+
+/* This targets the copyright text and forces it to sit beside the icons */
+.footer__copy {
+    font-size: 12px;
+    color: #4b5563;
+    margin-left: auto; /* Magic trick: shoves the text all the way to the right side */
+    margin-right: 24px; /* Creates a clean gap before the social emblems start */
+}
+
+.footer__socials {
+    display: flex;
+    gap: 16px;
+}
+
+.footer__social-icon {
+    color: #71717a;
+    font-size: 14px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer__social-icon:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Fixes display spacing for compact smartphone viewports */
+@media (max-width: 768px) {
+    footer { padding: 0 20px; }
+    .footer__copy { margin-right: 12px; }
+    .footer__socials { gap: 12px; }
+}
 
         /* Responsive design rules */
         @media (max-width: 768px) {
