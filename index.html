@@ -496,7 +496,7 @@
         <form id="whatsappForm">
             <div class="form-group">
                 <label for="clientName">Full Name</label>
-                <input type="text" id="clientName" placeholder="e.g. Ahmad Raziq" required>
+                <input type="text" id="clientName" placeholder="e.g. John Smith" required>
             </div>
 
             <div class="form-group">
@@ -524,11 +524,26 @@
         </form>
     </div>
 
-    <footer>
-        <div class="footer__links">
-        </div>
-        <div class="footer__copy">© 2026 Apex Lab. All rights reserved.</div>
-    </footer>
+<footer>
+    <div class="footer__links">
+        <!-- Keep this completely blank if you don't have secondary site pages -->
+    </div>
+    
+    <div class="footer__copy">© 2026 Apex Lab. All rights reserved.</div>
+
+    <!-- The social icons sit directly in the footer container row -->
+    <div class="footer__socials">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer__social-icon" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+        </a>
+    </div>
+</footer>
 
     <script type="text/javascript">
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
