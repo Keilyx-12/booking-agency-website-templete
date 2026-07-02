@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex Lab - Premium Paint Protection & Detailing</title>
+    <!-- Added Font Awesome for the social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Global Styles */
         * {
@@ -310,14 +312,12 @@
         /* Google Maps Container & Premium Styling */
         .google-maps-wrapper {
             width: 100%;
-            flex-grow: 1;
-            min-height: 350px;
+            height: 350px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
             position: relative;
-            
-            /* Inverts & desaturates Google Maps so it maps cleanly to your dark aesthetic */
+            margin-bottom: 24px;
             filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
         }
         .google-maps-wrapper iframe {
@@ -327,6 +327,25 @@
             position: absolute;
             top: 0;
             left: 0;
+        }
+
+        /* Social Media Icons under Map */
+        .map-socials {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            margin-top: auto;
+            padding-top: 10px;
+        }
+        .map-socials__link {
+            color: #71717a;
+            font-size: 22px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .map-socials__link:hover {
+            color: white;
+            transform: translateY(-3px);
         }
 
         /* Premium Form Styling */
@@ -443,7 +462,8 @@
                 border-left: none;
                 border-top: 1px solid rgba(255, 255, 255, 0.06);
             }
-            .google-maps-wrapper { min-height: 280px; }
+            .google-maps-wrapper { min-height: 280px; margin-bottom: 20px; }
+            .map-socials { margin-top: 10px; }
         }
     </style>
 </head>
@@ -595,20 +615,32 @@
                 </form>
             </div>
 
-            <!-- Right Side: Find Us Map -->
+            <!-- Right Side: Find Us Map & New Socials Block -->
             <div class="map-container-side">
                 <h2 style="font-size: 24px; letter-spacing: -0.03em; margin-bottom: 8px; text-align: center;">Find Us</h2>
                 <p style="color: #71717a; font-size: 14px; text-align: center; margin-bottom: 32px;">Our custom closed-environment clean studio setup location.</p>
                 
                 <!-- Google Maps Embed Mount Point -->
                 <div class="google-maps-wrapper">
-                    <!-- Swap the URL inside 'src' with your exact Google Maps shared embed link -->
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8842654313277!2d101.68432507604473!3d3.1390009535787684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc362abd73ac43%3A0x3ffbc6fb9aa15a24!2sKuala%20Lumpur%20Sentral!5e0!3m2!1sen!2smy!4v1710000000000!5m2!1sen!2smy" 
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
+                </div>
+
+                <!-- Contextual Social Media Icons directly below map -->
+                <div class="map-socials">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="map-socials__link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="map-socials__link" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="map-socials__link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
                 </div>
             </div>
 
@@ -617,7 +649,7 @@
 
     <footer>
         <div class="footer__links">
-            <!-- Kept completely empty just like you wanted -->
+            <!-- Left blank per requirement -->
         </div>
         
         <div class="footer__right-side">
