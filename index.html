@@ -307,6 +307,7 @@
             border-left: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
         
         /* Google Maps Container & Premium Styling */
@@ -329,7 +330,7 @@
             left: 0;
         }
 
-        /* Social Media Icons under Map */
+        /* Social Media Icons & Info under Map */
         .map-socials {
             display: flex;
             justify-content: center;
@@ -337,6 +338,7 @@
             gap: 32px;
             margin-top: auto;
             padding-top: 10px;
+            margin-bottom: 12px;
         }
         .map-socials__link {
             color: #71717a;
@@ -346,6 +348,16 @@
         .map-socials__link:hover {
             color: white;
             transform: translateY(-3px);
+        }
+        .map-phone {
+            font-size: 15px;
+            color: #a1a1aa;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        .map-phone:hover {
+            color: white;
         }
 
         /* Premium Form Styling */
@@ -361,7 +373,7 @@
             margin-bottom: 8px;
             font-weight: 600;
         }
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
             padding: 14px;
             background-color: #121214;
@@ -372,9 +384,40 @@
             outline: none;
             transition: border-color 0.3s ease;
         }
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus {
             border-color: rgba(255, 255, 255, 0.25);
         }
+
+        /* Custom Checklist Group Styling */
+        .checklist-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background-color: #121214;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #a1a1aa;
+            transition: color 0.2s ease;
+            user-select: none;
+        }
+        .checklist-item:hover {
+            color: white;
+        }
+        .checklist-item input[type="checkbox"] {
+            width: auto;
+            accent-color: white;
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
         .submit-btn {
             width: 100%;
             padding: 16px;
@@ -476,6 +519,7 @@
             <a href="#portal" class="nav-bar__link">Book Now</a>
             <a href="#portal" class="nav-bar__link">Find Us</a>
         </div>
+        <a href="#portal" class="nav-bar__action-button">Get Started</a>
     </div>
 
     <section class="hero-section">
@@ -594,15 +638,27 @@
                         <input type="text" id="carModel" placeholder="e.g. Honda Civic FE 2022" required>
                     </div>
 
+                    <!-- Changed from single select drop down to checklist selection -->
                     <div class="form-group">
-                        <label for="serviceType">Select Treatment</label>
-                        <select id="serviceType" required>
-                            <option value="" disabled selected>Choose a package...</option>
-                            <option value="Signature Correction & Coating (RM1,199)">Signature Correction & Coating (RM1,199)</option>
-                            <option value="Multi-Stage Paint Correction Only">Multi-Stage Paint Correction Only</option>
-                            <option value="Full Ceramic Coating Surface Layer">Full Ceramic Coating Surface Layer</option>
-                            <option value="Bespoke Interior & PPF Treatment">Bespoke Interior & PPF Treatment</option>
-                        </select>
+                        <label>Select Treatments</label>
+                        <div class="checklist-group" id="treatmentChecklist">
+                            <label class="checklist-item">
+                                <input type="checkbox" name="treatment" value="Signature Correction & Coating (RM1,199)">
+                                <span>Signature Correction & Coating (RM1,199)</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" name="treatment" value="Multi-Stage Paint Correction Only">
+                                <span>Multi-Stage Paint Correction Only</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" name="treatment" value="Full Ceramic Coating Surface Layer">
+                                <span>Full Ceramic Coating Surface Layer</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" name="treatment" value="Bespoke Interior & PPF Treatment">
+                                <span>Bespoke Interior & PPF Treatment</span>
+                            </label>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -614,7 +670,7 @@
                 </form>
             </div>
 
-            <!-- Right Side: Find Us Map & New Socials Block -->
+            <!-- Right Side: Find Us Map & Contextual Links -->
             <div class="map-container-side">
                 <h2 style="font-size: 24px; letter-spacing: -0.03em; margin-bottom: 8px; text-align: center;">Find Us</h2>
                 <p style="color: #71717a; font-size: 14px; text-align: center; margin-bottom: 32px;">Our custom closed-environment clean studio setup location.</p>
@@ -641,6 +697,9 @@
                         <i class="fab fa-facebook-f"></i>
                     </a>
                 </div>
+
+                <!-- Added text link phone number below socials -->
+                <a href="tel:+60123456789" class="map-phone">+60123456789</a>
             </div>
 
         </div>
@@ -675,15 +734,23 @@
 
             const name = document.getElementById('clientName').value;
             const car = document.getElementById('carModel').value;
-            const service = document.getElementById('serviceType').value;
             const date = document.getElementById('bookingDate').value;
+
+            // Extract checked values from checklist layout
+            const checkedBoxes = document.querySelectorAll('input[name="treatment"]:checked');
+            if (checkedBoxes.length === 0) {
+                alert('Please select at least one treatment before securing your slot.');
+                return;
+            }
+
+            const selectedTreatments = Array.from(checkedBoxes).map(box => box.value).join(', ');
 
             const phoneNumber = '60123456789'; 
 
             const message = `Hi Apex Lab,%0A%0AI would like to lock in a detailing slot:%0A%0A` +
                             `• *Name:* ${encodeURIComponent(name)}%0A` +
                             `• *Vehicle:* ${encodeURIComponent(car)}%0A` +
-                            `• *Service:* ${encodeURIComponent(service)}%0A` +
+                            `• *Service(s):* ${encodeURIComponent(selectedTreatments)}%0A` +
                             `• *Preferred Time:* ${encodeURIComponent(date)}%0A%0A` +
                             `Please let me know if this slot is available. Thanks!`;
 
