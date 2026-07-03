@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex Lab - Premium Paint Protection & Detailing</title>
-    <!-- Added Font Awesome for the social media icons -->
+    <!-- Added Font Awesome for the social media and phone icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Global Styles */
@@ -349,15 +349,24 @@
             color: white;
             transform: translateY(-3px);
         }
-        .map-phone {
-            font-size: 15px;
+        
+        /* Structured Phone Container with Call Icon */
+        .map-phone-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: #a1a1aa;
+            font-size: 15px;
             font-weight: 500;
             letter-spacing: 0.05em;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
-        .map-phone:hover {
+        .map-phone-wrapper:hover {
             color: white;
+        }
+        .map-phone-wrapper i {
+            font-size: 14px;
         }
 
         /* Premium Form Styling */
@@ -373,7 +382,7 @@
             margin-bottom: 8px;
             font-weight: 600;
         }
-        .form-group input {
+        .form-group input[type="text"] {
             width: 100%;
             padding: 14px;
             background-color: #121214;
@@ -384,21 +393,31 @@
             outline: none;
             transition: border-color 0.3s ease;
         }
-        .form-group input:focus {
+        .form-group input[type="text"]:focus {
             border-color: rgba(255, 255, 255, 0.25);
         }
 
-        /* Custom Checklist Group Styling */
-        .checklist-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        /* Logical Checklist Group Layout styling */
+        .selection-box {
             background-color: #121214;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
-        .checklist-item {
+        .selection-box__section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #4b5563;
+            font-weight: 700;
+            margin-bottom: 2px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding-bottom: 6px;
+        }
+        .selection-item {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -408,11 +427,10 @@
             transition: color 0.2s ease;
             user-select: none;
         }
-        .checklist-item:hover {
+        .selection-item:hover {
             color: white;
         }
-        .checklist-item input[type="checkbox"] {
-            width: auto;
+        .selection-item input {
             accent-color: white;
             cursor: pointer;
             transform: scale(1.1);
@@ -638,25 +656,32 @@
                         <input type="text" id="carModel" placeholder="e.g. Honda Civic FE 2022" required>
                     </div>
 
-                    <!-- Changed from single select drop down to checklist selection -->
+                    <!-- Optimized Logical Packages Checklist Layout -->
                     <div class="form-group">
                         <label>Select Treatments</label>
-                        <div class="checklist-group" id="treatmentChecklist">
-                            <label class="checklist-item">
-                                <input type="checkbox" name="treatment" value="Signature Correction & Coating (RM1,199)">
+                        <div class="selection-box">
+                            <div class="selection-box__section-title">1. Choose Base Service (Pick One)</div>
+                            <label class="selection-item">
+                                <input type="radio" name="baseTier" value="Signature Correction & Coating (RM1,199)" checked>
                                 <span>Signature Correction & Coating (RM1,199)</span>
                             </label>
-                            <label class="checklist-item">
-                                <input type="checkbox" name="treatment" value="Multi-Stage Paint Correction Only">
+                            <label class="selection-item">
+                                <input type="radio" name="baseTier" value="Multi-Stage Paint Correction Only">
                                 <span>Multi-Stage Paint Correction Only</span>
                             </label>
-                            <label class="checklist-item">
-                                <input type="checkbox" name="treatment" value="Full Ceramic Coating Surface Layer">
-                                <span>Full Ceramic Coating Surface Layer</span>
+                            <label class="selection-item">
+                                <input type="radio" name="baseTier" value="Full Ceramic Coating Surface Layer">
+                                <span>Full Ceramic Coating Surface Layer (New Cars Only)</span>
                             </label>
-                            <label class="checklist-item">
-                                <input type="checkbox" name="treatment" value="Bespoke Interior & PPF Treatment">
-                                <span>Bespoke Interior & PPF Treatment</span>
+
+                            <div class="selection-box__section-title" style="margin-top: 6px;">2. Add-Ons (Optional)</div>
+                            <label class="selection-item">
+                                <input type="checkbox" name="addonService" value="Bespoke Interior Treatment">
+                                <span>Bespoke Interior Treatment</span>
+                            </label>
+                            <label class="selection-item">
+                                <input type="checkbox" name="addonService" value="Premium Front-End PPF Protection">
+                                <span>Premium Front-End PPF Wrap</span>
                             </label>
                         </div>
                     </div>
@@ -698,8 +723,11 @@
                     </a>
                 </div>
 
-                <!-- Added text link phone number below socials -->
-                <a href="tel:+60123456789" class="map-phone">+60123456789</a>
+                <!-- Phone number with call icon directly next to it -->
+                <a href="tel:+60123456789" class="map-phone-wrapper">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+60123456789</span>
+                </a>
             </div>
 
         </div>
@@ -736,21 +764,23 @@
             const car = document.getElementById('carModel').value;
             const date = document.getElementById('bookingDate').value;
 
-            // Extract checked values from checklist layout
-            const checkedBoxes = document.querySelectorAll('input[name="treatment"]:checked');
-            if (checkedBoxes.length === 0) {
-                alert('Please select at least one treatment before securing your slot.');
-                return;
+            // Get selected core base package
+            const selectedBase = document.querySelector('input[name="baseTier"]:checked').value;
+            
+            // Collect any checked add-ons
+            const checkedAddons = document.querySelectorAll('input[name="addonService"]:checked');
+            let addonText = "";
+            if (checkedAddons.length > 0) {
+                addonText = " + Addons: " + Array.from(checkedAddons).map(box => box.value).join(', ');
             }
 
-            const selectedTreatments = Array.from(checkedBoxes).map(box => box.value).join(', ');
-
+            const totalServices = selectedBase + addonText;
             const phoneNumber = '60123456789'; 
 
             const message = `Hi Apex Lab,%0A%0AI would like to lock in a detailing slot:%0A%0A` +
                             `• *Name:* ${encodeURIComponent(name)}%0A` +
                             `• *Vehicle:* ${encodeURIComponent(car)}%0A` +
-                            `• *Service(s):* ${encodeURIComponent(selectedTreatments)}%0A` +
+                            `• *Service(s):* ${encodeURIComponent(totalServices)}%0A` +
                             `• *Preferred Time:* ${encodeURIComponent(date)}%0A%0A` +
                             `Please let me know if this slot is available. Thanks!`;
 
